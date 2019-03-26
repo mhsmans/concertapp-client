@@ -1,0 +1,21 @@
+@import "mixins";
+
+// Screen sizes for breakpoints.
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-lg-min: 1200px;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 20px 15px 20px 15px;
+  margin-right: auto;
+  margin-left: auto;
+  background-color: none;
+
+  max-width: 800px;
+}
