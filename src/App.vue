@@ -3,23 +3,62 @@
     <div id="app">
       <div id="nav">
         <div class="left-group">
-          <router-link :to="{name: 'home'}">
+          <router-link :to="{ name: 'home' }">
             <p class="branding">Concert-app</p>
           </router-link>
         </div>
         <div class="right-group">
           <router-link to="/">Home</router-link>
-          <router-link to="/about">About</router-link>
+          <router-link v-if="userSignedIn === true" router-link to="/profile">My Profile</router-link>
+          <a v-else @click.prevent="toggleAuthModal">Sign in</a>
         </div>
       </div>
       <div class="container">
         <transition name="fade" mode="out-in">
-          <router-view/>
+          <router-view></router-view>
         </transition>
       </div>
+      <transition name="fade">
+        <div v-if="authModal" class="modal-mask" @click="toggleAuthModal">
+          <Authentication></Authentication>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+
+import Authentication from "@/views/Authentication.vue";
+
+@Component({
+  components: { Authentication }
+})
+export default class Home extends Vue {
+  userSignedIn: Boolean = false;
+
+  beforeUpdate() {
+    this.userSignedIn = this.SignedIn();
+  }
+
+  get authModal() {
+    return this.$store.getters.authModal;
+  }
+
+  SignedIn() {
+    if (window.sessionStorage.getItem("concert-app-token") !== null) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  toggleAuthModal() {
+    this.$store.commit("toggleAuthModal");
+  }
+}
+</script>
 
 <style lang="scss">
 @import url("https://fonts.googleapis.com/css?family=Maven+Pro|Exo+2");
@@ -40,7 +79,7 @@
   @include nav-shadow;
 
   a {
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
     color: $color-white;
   }
@@ -61,11 +100,20 @@
   text-align: right;
 
   a {
-    margin: 0px 10px;
+    margin: 0px 20px;
     transition: color 0.3s ease;
   }
   :last-child {
     margin-right: 0;
   }
+}
+
+.modal-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color-background, 0.6);
 }
 </style>

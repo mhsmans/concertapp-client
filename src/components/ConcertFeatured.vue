@@ -92,7 +92,7 @@ export default class ConcertFeatured extends Vue {
   text-transform: uppercase;
   text-align: center;
   font-weight: bold;
-  background-color: rgba($color-gray, 0.4);
+  background-color: rgba($color-gray, 0.6);
 
   > h2 {
     margin: 0;
@@ -119,7 +119,7 @@ export default class ConcertFeatured extends Vue {
   font-size: 1.2em;
   margin: 0 auto;
   padding: 10px;
-  background-color: rgba($color-gray, 0.4);
+  background-color: rgba($color-gray, 0.6);
 
   > p {
     margin-top: 0;

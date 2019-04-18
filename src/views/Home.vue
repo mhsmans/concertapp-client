@@ -32,7 +32,7 @@
           <h2>Artists</h2>
         </div>
       </div>
-      <div>
+      <div class="list-wrap">
         <div v-if="concertListActive">
           <transition name="fade" mode="out-in">
             <ConcertList></ConcertList>
@@ -47,21 +47,24 @@
     </div>
   </div>
 </template>
-<div v-bind:class="[isActive ? activeClass : '', errorClass]"></div>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 
 import ConcertList from "../components/ConcertList.vue";
+import ArtistList from "../components/ArtistList.vue";
 import ConcertFeatured from "../components/ConcertFeatured.vue";
 import { concertService } from "../services/concert.service";
+import { artistService } from "../services/artist.service";
+import { Artist } from "../models/artist";
 import { Concert } from "../models/concert";
 
 @Component({
-  components: { ConcertFeatured, ConcertList }
+  components: { ConcertFeatured, ConcertList, ArtistList }
 })
 export default class Home extends Vue {
   concerts: Concert[] = <Concert[]>[];
+  artists: Artist[] = <Artist[]>[];
 
   created() {
     this.concerts = [];
@@ -70,6 +73,15 @@ export default class Home extends Vue {
       .then(response => (this.concerts = response.data))
       .then(() => {
         this.$store.commit("storeConcerts", this.concerts);
+      })
+      .catch(err => console.log(err));
+
+    this.artists = [];
+    artistService
+      .getArtists()
+      .then(response => (this.artists = response.data))
+      .then(() => {
+        this.$store.commit("storeArtists", this.artists);
       })
       .catch(err => console.log(err));
   }
@@ -126,5 +138,9 @@ h2 {
 .active {
   background-color: $color-background-secondary;
   color: $color-primary;
+}
+
+.list-wrap {
+  min-height: 50vh;
 }
 </style>

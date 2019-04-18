@@ -1,20 +1,22 @@
 <template>
   <div class="concert-list">
-    <div v-for="concert in concerts" :key="concert.id">
-      <div class="concert-background">
-        <div class="concert">
-          <div class="image">
-            <img :src="concert.image">
-          </div>
-          <div class="right-grid">
-            <div class="title">
-              <p>{{ concert.name }}</p>
+    <div v-for="concert in concerts" :key="concert._id">
+      <div v-if="concert._id != concerts[0]._id">
+        <div class="concert-background">
+          <div class="concert">
+            <div class="image">
+              <img :src="concert.image">
             </div>
-            <div class="date">
-              <p>Date: {{ concert.date }}</p>
-            </div>
-            <div class="country">
-              <p>Country: {{ concert.country }}</p>
+            <div class="right-grid">
+              <div class="title">
+                <p>{{ concert.name }}</p>
+              </div>
+              <div class="date">
+                <p>Date: {{ concert.date }}</p>
+              </div>
+              <div class="country">
+                <p>Country: {{ concert.country }}</p>
+              </div>
             </div>
           </div>
         </div>
