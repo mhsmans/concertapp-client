@@ -26,13 +26,13 @@ class AuthService {
     return axios.get(`http://localhost:3050/${api}/profile`, {
       headers: {
         Authorization:
-          "Bearer " + window.sessionStorage.getItem("concert-app-token")
+          "Bearer " + window.localStorage.getItem("concert-app-token")
       }
     });
   }
 
   isLoggedIn() {
-    let userData = this.getTokenData(window.sessionStorage.getItem("concert-app-token"));
+    let userData = this.getTokenData(window.localStorage.getItem("concert-app-token"));
     if (userData == null) {
       return false;
     } else if (userData.exp > Math.floor(Date.now() / 1000)) {
@@ -54,7 +54,7 @@ class AuthService {
   }
 
   signOut() {
-    window.sessionStorage.removeItem("concert-app-token");
+    window.localStorage.removeItem("concert-app-token");
   }
 }
 

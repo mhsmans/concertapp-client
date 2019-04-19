@@ -1,7 +1,7 @@
 <template>
   <div class="artist-list">
     <div v-for="artist in artists" :key="artist._id">
-      <div class="artist-background">
+      <div class="artist-background" @click="toArtistDetail(artist._id)">
         <div class="artist">
           <div class="title">
             <p>{{ artist.name }}</p>
@@ -20,6 +20,10 @@ import { Component, Vue } from "vue-property-decorator";
 export default class ArtistList extends Vue {
   get artists() {
     return this.$store.getters.artists;
+  }
+
+  toArtistDetail(id: string) {
+    this.$router.push("/artist/" + id);
   }
 }
 </script>

@@ -111,6 +111,7 @@ export default class RegisterForm extends Vue {
         .then(token => {
           this.$store.commit("storeUserData", token.data);
           this.$store.commit("toggleAuthModal");
+          this.$router.push("/");
         })
         .catch(err => {
           this.emailAlreadyInUse = true;

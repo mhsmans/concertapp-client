@@ -41,7 +41,6 @@
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
 import { authService } from "../services/auth.service";
-import router from '../router';
 
 @Component({})
 export default class LoginForm extends Vue {
@@ -69,7 +68,7 @@ export default class LoginForm extends Vue {
             this.hasError = false;
             this.$store.commit("storeUserData", token.data);
             this.$store.commit("toggleAuthModal");
-            router.push("/");
+            this.$router.push("/");
           } else {
             this.hasError = true;
           }
@@ -111,24 +110,6 @@ input {
   background-color: $color-white;
   border: 0;
   color: $color-gray;
-}
-
-.button {
-  font-size: 1.2em;
-  border: 2px solid $color-primary;
-  padding: 10px 20px 10px 20px;
-  background-color: $color-background-secondary;
-  color: $color-white;
-  cursor: pointer;
-}
-
-.close-button {
-  font-size: 1.2em;
-  border: 2px solid $color-red;
-  padding: 10px 20px 10px 20px;
-  background-color: $color-background-secondary;
-  color: $color-white;
-  cursor: pointer;
 }
 
 .register-link {

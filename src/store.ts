@@ -60,7 +60,7 @@ export default new Vuex.Store({
       }
     },
     storeUserData(state, data) {
-      window.sessionStorage.setItem("concert-app-token", data.token);
+      window.localStorage.setItem("concert-app-token", data.token);
     }
   },
   actions: {

@@ -10,7 +10,7 @@
     </div>
 
     <div v-else>
-      <div class="featured-title">
+      <div class="page-title">
         <h1>Featured</h1>
       </div>
       <div>
@@ -101,14 +101,6 @@ export default class Home extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.featured-title {
-  width: fit-content;
-  padding: 0 10px;
-  border-left: 4px solid $color-primary;
-  margin-bottom: 20px;
-  text-transform: uppercase;
-}
-
 .seperator {
   display: grid;
   grid-template-columns: 1fr 1fr;

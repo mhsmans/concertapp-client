@@ -7,6 +7,10 @@ class ConcertService {
   getConcerts() {
     return axios.get<Concert[]>(`http://localhost:3050/${api}/concerts`);
   }
+
+  getConcert(id: string) {
+    return axios.get<Concert>(`http://localhost:3050/${api}/concerts/` + id);
+  }
 }
 
 export const concertService = new ConcertService();

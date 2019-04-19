@@ -38,6 +38,10 @@ import Authentication from "@/views/Authentication.vue";
 export default class Home extends Vue {
   userSignedIn: Boolean = false;
 
+  beforeMount() {
+    this.userSignedIn = this.SignedIn();
+  }
+
   beforeUpdate() {
     this.userSignedIn = this.SignedIn();
   }
@@ -47,7 +51,7 @@ export default class Home extends Vue {
   }
 
   SignedIn() {
-    if (window.sessionStorage.getItem("concert-app-token") !== null) {
+    if (window.localStorage.getItem("concert-app-token") !== null) {
       return true;
     } else {
       return false;

@@ -1,13 +1,13 @@
 <template>
   <div v-if="concerts[0]">
-    <div class="concert-background">
+    <div class="concert-background" @click="toConcertDetail(concerts[0]._id)">
       <div class="concert-featured">
         <div class="image">
           <img :src="concerts[0].image" alt>
           <div class="image-wrap">
             <div class="title">
               <h2>{{ concerts[0].name }}</h2>
-
+              <p style="font-size: 1.2em;">{{ concerts[0].artist.name }}</p>
               <div class="date">
                 <p>{{ concerts[0].date }}</p>
                 <p>/</p>
@@ -37,6 +37,10 @@ import { Concert } from "../models/concert";
 export default class ConcertFeatured extends Vue {
   get concerts() {
     return this.$store.getters.concerts;
+  }
+
+  toConcertDetail(id: string) {
+    this.$router.push("/concert/" + id);
   }
 }
 </script>

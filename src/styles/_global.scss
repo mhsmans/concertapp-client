@@ -96,3 +96,29 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.button {
+  font-size: 1.2em;
+  border: 2px solid $color-primary;
+  padding: 10px 20px 10px 20px;
+  background-color: $color-background-secondary;
+  color: $color-white;
+  cursor: pointer;
+}
+
+.close-button {
+  font-size: 1.2em;
+  border: 2px solid $color-red;
+  padding: 10px 20px 10px 20px;
+  background-color: $color-background-secondary;
+  color: $color-white;
+  cursor: pointer;
+}
+
+.page-title {
+  width: fit-content;
+  padding: 0 10px;
+  border-left: 4px solid $color-primary;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}

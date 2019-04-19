@@ -2,7 +2,7 @@
   <div class="concert-list">
     <div v-for="concert in concerts" :key="concert._id">
       <div v-if="concert._id != concerts[0]._id">
-        <div class="concert-background">
+        <div class="concert-background" @click="toConcertDetail(concert._id)">
           <div class="concert">
             <div class="image">
               <img :src="concert.image">
@@ -16,6 +16,12 @@
               </div>
               <div class="country">
                 <p>Country: {{ concert.country }}</p>
+              </div>
+              <div class="artist">
+                <p>Artist: {{ concert.artist.name }}</p>
+              </div>
+              <div class="tickets">
+                <p><span class="tickets-left">{{ concert.ticketsLeft }}</span> / {{ concert.ticketsAvailable }}</p>
               </div>
             </div>
           </div>
@@ -34,12 +40,21 @@ export default class ConcertList extends Vue {
   get concerts() {
     return this.$store.getters.concerts;
   }
+
+  toConcertDetail(id: string) {
+    this.$router.push("/concert/" + id);
+  }
 }
 </script>
 
 <style lang="scss" scoped>
 .concert-background {
   background-color: $color-primary;
+}
+
+.tickets-left {
+  color: $color-primary;
+  margin-left: 10px;
 }
 
 .concert {
@@ -64,7 +79,7 @@ export default class ConcertList extends Vue {
 
 .right-grid {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
   padding: 0 10px 0 10px;
 }
 
@@ -75,6 +90,11 @@ export default class ConcertList extends Vue {
     height: 200px;
     vertical-align: bottom;
   }
+}
+
+.tickets {
+  text-align: right;
+  grid-row-start: 6;
 }
 </style>
 
