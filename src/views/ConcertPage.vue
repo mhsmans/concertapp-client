@@ -5,7 +5,7 @@
     </div>
     <div class="concert-wrap">
       <div class="name">{{ concert.name }}</div>
-      <div class="artist">Artist: {{ concert.artist.name }}</div>
+      <div class="artist" v-if="concert.artist">Artist: {{ concert.artist.name }}</div>
       <div class="country">Country: {{ concert.country }}</div>
       <div class="date">Date: {{ concert.date }}</div>
       <div class="tickets">
@@ -15,7 +15,7 @@
       </div>
       <div class="price">Ticketprice: &euro;{{ concert.price }},-</div>
       <div>
-        <button class="button">Place order</button>
+        <button class="button" v-if="loggedIn" @click="addTicketToUser">Place order</button>
       </div>
     </div>
     <div class="image-wrap">
@@ -31,11 +31,15 @@
 import { Component, Vue } from "vue-property-decorator";
 
 import { Concert } from "@/models/concert";
+import { Ticket } from "@/models/ticket";
 import { concertService } from "@/services/concert.service";
+import { authService } from "@/services/auth.service";
+import { ticketService } from "@/services/ticket.service";
 
 @Component({})
-export default class Profile extends Vue {
+export default class ConcertPage extends Vue {
   concert: Concert = <Concert>{};
+  ticket: Ticket = <Ticket>{};
 
   created() {
     concertService
@@ -46,6 +50,35 @@ export default class Profile extends Vue {
       .catch(err => {
         console.log("failed to find concert");
       });
+  }
+
+  addTicketToUser() {
+    this.ticket.concertId = this.concert._id;
+    let conf = confirm("Press ok to confirm ticket order.");
+    if (conf) {
+      ticketService
+        .addTicket(this.ticket)
+        .then(res => {
+          alert("Ticket order added to profile!");
+        })
+        .catch(err => {
+          console.log("failed to add ticket order.");
+        });
+    }
+  }
+
+  get loggedIn(): Boolean {
+    if (
+      !authService.isLoggedIn() &&
+      window.localStorage.getItem("concert-app-token") !== null
+    ) {
+      window.localStorage.removeItem("concert-app-token");
+      return false;
+    } else if (authService.isLoggedIn()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 </script>

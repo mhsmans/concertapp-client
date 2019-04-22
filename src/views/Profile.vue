@@ -21,6 +21,15 @@
           <button class="sign-out-button" @click="signOut">Sign out</button>
         </div>
       </div>
+      <div>
+        <div class="ticket-wrap" v-for="ticket in profile.tickets" :key="ticket._id">
+          <div class="ticket">
+            <h2>Ticket: {{ ticket.concert.name }}</h2>
+            <p>Ticket ID: {{ ticket._id }}</p>
+            <p>Date: {{ ticket.concert.date }}</p>
+          </div>
+        </div>
+      </div>
     </div>
     <div v-else>
       <div class="message-wrap">
@@ -72,7 +81,6 @@ export default class Profile extends Vue {
     }
   }
 
-  // Need to remove my profile
   signOut() {
     authService.signOut();
     this.$router.push("/");
@@ -81,6 +89,18 @@ export default class Profile extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.ticket-wrap {
+  padding: 10px;
+  background-color: $color-background-secondary;
+  border: 1px solid $color-background-header;
+  margin-top: 10px;
+
+  h2,
+  p {
+    margin-top: 0;
+    margin-bottom: 10px;
+  }
+}
 
 .message-wrap {
   text-align: center;

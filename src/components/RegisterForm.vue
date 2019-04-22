@@ -140,7 +140,7 @@ export default class RegisterForm extends Vue {
     }
   }
 
-  checkForm() {
+  checkForm(): boolean {
     if (this.inputData.email !== "" && this.validEmail(this.inputData.email)) {
       this.hasEmailError = false;
     } else {

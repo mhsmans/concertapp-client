@@ -3,7 +3,10 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Profile from "./views/Profile.vue";
 import Artist from "./views/Artist.vue";
-import Concert from "./views/Concert.vue";
+import ConcertPage from "./views/ConcertPage.vue";
+import CreateContent from "./views/CreateContent.vue";
+
+import { authService } from "@/services/auth.service";
 
 Vue.use(Router);
 
@@ -29,7 +32,22 @@ export default new Router({
     {
       path: "/concert/:id",
       name: "concert",
-      component: Concert
+      component: ConcertPage
+    },
+    {
+      path: "/create",
+      name: "create-content",
+      component: CreateContent,
+      beforeEnter: (to, from, next) => {
+        authService
+          .isAdmin()
+          .then(() => {
+            next();
+          })
+          .catch(err => {
+            next("/");
+          });
+      }
     },
     {
       path: "*",

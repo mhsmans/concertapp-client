@@ -9,7 +9,8 @@ export default new Vuex.Store({
     artists: [],
     concertListActive: true,
     authModalActive: false,
-    loginModalActive: true
+    loginModalActive: true,
+    createArtist: true
   },
   getters: {
     concerts(state) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     loginModalActive(state) {
       return state.loginModalActive;
+    },
+    createArtist(state) {
+      return state.createArtist;
     }
   },
   mutations: {
@@ -57,6 +61,13 @@ export default new Vuex.Store({
         state.loginModalActive = false;
       } else {
         state.loginModalActive = true;
+      }
+    },
+    toggleCreateArtist(state) {
+      if (state.createArtist) {
+        state.createArtist = false;
+      } else {
+        state.createArtist = true;
       }
     },
     storeUserData(state, data) {

@@ -104,7 +104,8 @@ export default class LoginForm extends Vue {
   margin-top: 20px;
 }
 
-input {
+input,
+select {
   font-size: 1.3em;
   padding: 10px;
   background-color: $color-white;

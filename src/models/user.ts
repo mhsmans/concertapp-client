@@ -6,8 +6,9 @@ export class User {
       public firstName: string,
       public lastName: string,
       public password: string,
-      public tickets?: [Ticket],
-      public infix?: string,
+      public role?: string,
+      public tickets?: [string],
+      public infix?: string
     ) {}
   }
   

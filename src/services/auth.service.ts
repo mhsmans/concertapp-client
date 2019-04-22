@@ -1,6 +1,5 @@
 import axios from "axios";
 import { User } from "../models/user";
-import { UserDetails } from "../models/userDetails";
 
 const api = "api";
 
@@ -32,7 +31,9 @@ class AuthService {
   }
 
   isLoggedIn() {
-    let userData = this.getTokenData(window.localStorage.getItem("concert-app-token"));
+    let userData = this.getTokenData(
+      window.localStorage.getItem("concert-app-token")
+    );
     if (userData == null) {
       return false;
     } else if (userData.exp > Math.floor(Date.now() / 1000)) {
@@ -40,6 +41,25 @@ class AuthService {
     } else {
       return false;
     }
+  }
+
+  isAdmin() {
+    return new Promise((resolve, reject) => {
+      this.viewProfile()
+        .then(profile => {
+          if (
+            profile.data.email == "admin@mail.com" &&
+            profile.data.role == "admin"
+          ) {
+            resolve();
+          } else {
+            reject();
+          }
+        })
+        .catch(err => {
+          console.log({ err });
+        });
+    });
   }
 
   getTokenData(token: string | null) {
