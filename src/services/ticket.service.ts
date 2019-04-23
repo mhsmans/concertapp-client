@@ -2,7 +2,7 @@ import axios from "axios";
 import { Ticket } from "../models/ticket";
 
 const api = "api";
-const serverUrl = "http://localhost:3050/"
+const serverUrl = process.env.VUE_APP_TARGET;
 
 class TicketService {
   addTicket(ticket: Ticket) {

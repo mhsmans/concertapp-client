@@ -2,7 +2,8 @@ import axios from "axios";
 import { Concert } from "../models/concert";
 
 const api = "api";
-const serverUrl = "http://localhost:3050/"
+const serverUrl = process.env.VUE_APP_TARGET;
+
 
 class ConcertService {
   getConcerts() {

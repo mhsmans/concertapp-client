@@ -2,7 +2,7 @@ import axios from "axios";
 import { User } from "../models/user";
 
 const api = "api";
-const serverUrl = "http://localhost:3050/"
+const serverUrl = process.env.VUE_APP_TARGET;
 
 class AuthService {
   login(email: String, password: String) {
