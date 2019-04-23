@@ -4,7 +4,7 @@
       <div id="nav">
         <div class="left-group">
           <router-link :to="{ name: 'home' }">
-            <p class="branding">Concert-app</p>
+            <p class="branding">{{ appTitle }}</p>
           </router-link>
         </div>
         <div class="right-group">
@@ -37,6 +37,10 @@ import Authentication from "@/views/Authentication.vue";
 })
 export default class Home extends Vue {
   userSignedIn: Boolean = false;
+
+  get appTitle() {
+    return process.env.VUE_APP_TITLE;
+  }
 
   beforeMount() {
     this.userSignedIn = this.SignedIn();

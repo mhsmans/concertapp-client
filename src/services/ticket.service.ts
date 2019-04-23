@@ -2,11 +2,12 @@ import axios from "axios";
 import { Ticket } from "../models/ticket";
 
 const api = "api";
+const serverUrl = "http://localhost:3050/"
 
 class TicketService {
   addTicket(ticket: Ticket) {
     return axios.post<Ticket>(
-      `http://localhost:3050/${api}/ticket/`,
+      `${serverUrl}${api}/ticket`,
       {
         concert: ticket.concertId
       },

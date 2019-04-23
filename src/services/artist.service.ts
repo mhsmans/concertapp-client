@@ -2,19 +2,20 @@ import axios from "axios";
 import { Artist } from "../models/artist";
 
 const api = "api";
+const serverUrl = "http://localhost:3050/"
 
 class ArtistService {
   getArtists() {
-    return axios.get<Artist[]>(`http://localhost:3050/${api}/artists`);
+    return axios.get<Artist[]>(`${serverUrl}${api}/artists`);
   }
 
   getArtist(id: string) {
-    return axios.get<Artist>(`http://localhost:3050/${api}/artists/` + id);
+    return axios.get<Artist>(`${serverUrl}${api}/artists/` + id);
   }
 
   createArtist(artist: Artist) {
     return axios.post<Artist>(
-      `http://localhost:3050/${api}/artists`,
+      `${serverUrl}${api}/artists`,
       {
         name: artist.name,
         bio: artist.bio

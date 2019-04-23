@@ -2,17 +2,18 @@ import axios from "axios";
 import { User } from "../models/user";
 
 const api = "api";
+const serverUrl = "http://localhost:3050/"
 
 class AuthService {
   login(email: String, password: String) {
-    return axios.post(`http://localhost:3050/${api}/login`, {
+    return axios.post(`${serverUrl}${api}/login`, {
       email: email,
       password: password
     });
   }
 
   register(user: User) {
-    return axios.post(`http://localhost:3050/${api}/register`, {
+    return axios.post(`${serverUrl}${api}/register`, {
       email: user.email,
       firstName: user.firstName,
       infix: user.infix,
@@ -22,7 +23,7 @@ class AuthService {
   }
 
   viewProfile() {
-    return axios.get(`http://localhost:3050/${api}/profile`, {
+    return axios.get(`${serverUrl}${api}/profile`, {
       headers: {
         Authorization:
           "Bearer " + window.localStorage.getItem("concert-app-token")
